@@ -1,11 +1,18 @@
 package edu.eci.arep.logService;
 
+import edu.eci.arep.logService.service.MongoService;
 import spark.Request;
 import spark.Response;
 
 import static spark.Spark.*;
 
 public class SparkWebServer {
+
+    private static final MongoService mongoService;
+
+    static {
+        mongoService = new MongoService();
+    }
 
     public static void main( String[] args ) {
         port(getPort());
@@ -26,6 +33,8 @@ public class SparkWebServer {
     }
 
     private static String uploadAStringAndGetLastStrings(Request request, Response response) {
-        return "";
+        response.type("application/json");
+        String newString = request.queryParams("newString");
+        return mongoService.uploadAStringAndGetLastStrings(newString);
     }
 }
