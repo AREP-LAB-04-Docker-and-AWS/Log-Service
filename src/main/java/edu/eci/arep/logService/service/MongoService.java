@@ -12,6 +12,6 @@ public class MongoService {
 
     public String uploadAStringAndGetLastStrings(String newString) {
         mongoRepository.saveNewString(newString);
-        return mongoRepository.getLastStrings(10);
+        return mongoRepository.getLastStrings();
     }
 }
